@@ -1,0 +1,414 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Казкові сходи виховання</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+<style>
+/* Layout: one framed scene; animated sky band and meadow band layered over the still painting; glowing script labels on the steps */
+:root {
+  --sky: #2a1830;
+  --dusk: #4a2a45;
+  --glow: #fff2a0;
+  --glow-deep: #ffd84f;
+  --plum: 38, 14, 34;
+  --rose: #f6c6d6;
+  --font-display: "Lobster", "Georgia", serif;
+  color-scheme: dark;
+}
+html, body { min-height: 100%; }
+body {
+  background: radial-gradient(ellipse at 50% 0%, var(--dusk), var(--sky) 70%);
+  color: var(--rose);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 28px;
+  font-family: var(--font-display);
+}
+.wrap { max-width: 760px; margin: 0 auto; display: grid; gap: 14px; }
+h1 {
+  margin: 0; text-align: center; font-weight: 400;
+  font-size: clamp(1.7rem, 5.5vw, 2.8rem); color: var(--rose);
+  text-shadow: 0 0 18px rgba(255, 190, 220, .55); text-wrap: balance;
+}
+.scene {
+  position: relative; width: 100%; max-width: 100%;
+  aspect-ratio: 1114 / 1514; container-type: inline-size;
+  border-radius: 18px; overflow: hidden;
+  background: url("bg.jpg") center / cover no-repeat;
+  box-shadow: 0 20px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(255,220,235,.15);
+}
+.scene svg.live { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+/* soft wisps drifting across the top sky */
+.wisp {
+  position: absolute; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(255,214,228,.45), rgba(255,200,220,.18) 45%, transparent 70%);
+  filter: blur(6px);
+  animation: drift linear infinite;
+}
+.w1 { top: 2%;  width: 46%; height: 7%;  animation-duration: 48s; }
+.w2 { top: 9%;  width: 34%; height: 5%;  animation-duration: 62s; animation-delay: -20s; opacity: .8; }
+.w3 { top: 15%; width: 40%; height: 6%;  animation-duration: 55s; animation-delay: -38s; opacity: .7; }
+@keyframes drift { from { left: -50%; } to { left: 105%; } }
+
+/* glowing step labels */
+.step {
+  position: absolute; transform: translate(-50%, -50%);
+  display: inline-block; padding: .18em .75em .42em;
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(17px, 5.2cqw, 38px); line-height: 1.1; letter-spacing: .01em;
+  color: var(--glow); text-decoration: none; white-space: nowrap;
+  border-radius: 999px;
+  background: radial-gradient(ellipse at center, rgba(var(--plum), .72) 0%, rgba(var(--plum), .55) 55%, rgba(var(--plum), 0) 78%);
+  text-shadow:
+    0 0 1px rgba(var(--plum), 1), 0 1px 2px rgba(var(--plum), .95), 0 0 3px rgba(var(--plum), .9),
+    0 0 10px rgba(255,232,120,.75), 0 0 20px rgba(255,216,90,.45);
+  animation: glow 3s ease-in-out infinite;
+  transition: transform .25s ease, color .25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.step::after {
+  content: ""; position: absolute; left: 12%; right: 12%; bottom: .14em; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--glow) 18%, #fff 50%, var(--glow) 82%, transparent);
+  box-shadow: 0 0 6px rgba(255,230,120,.9);
+  transition: transform .3s ease;
+}
+.step::before {
+  content: ""; position: absolute; left: 30%; right: 30%; bottom: -.02em; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glow-deep), transparent); opacity: .9;
+}
+.step:hover, .step:focus-visible { transform: translate(-50%, -50%) scale(1.06); color: #fffbe0; }
+.step:hover::after, .step:focus-visible::after { transform: scaleX(1.08); }
+.step:focus-visible { outline: 2px dashed var(--glow); outline-offset: 4px; }
+.s1 { left: 58%; top: 70.5%; }
+.s2 { left: 46%; top: 58.5%; animation-delay: 1s; }
+.s3 { left: 42%; top: 43.5%; }
+.s3 .step { animation-delay: 2s; }
+@keyframes glow {
+  0%,100% { color: var(--glow); }
+  50% { color: #fffbe0; }
+}
+
+/* sparkle burst on click */
+.spark {
+  position: absolute; width: 8px; height: 8px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, #fff, var(--glow) 40%, transparent 70%);
+  animation: burst .9s ease-out forwards;
+}
+@keyframes burst {
+  from { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+  to { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.3); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step, .wisp { animation: none; }
+  .wisp { display: none; }
+}
+
+/* November group: one heading, two role buttons */
+.group { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: .35em; font-size: clamp(17px, 5.2cqw, 38px); }
+.group .step { position: relative; transform: none; cursor: default; }
+.group .step:hover { transform: none; }
+.subs { display: flex; gap: .6em; flex-wrap: nowrap; }
+.sub {
+  font-family: var(--font-display); font-size: .62em; white-space: nowrap; text-decoration: none;
+  color: #3d1d0c; padding: .3em .9em .38em; border-radius: 999px;
+  background: linear-gradient(180deg, #fffbe2, var(--glow) 60%, var(--glow-deep));
+  box-shadow: 0 0 0 1px rgba(255,255,255,.7), 0 0 8px 2px rgba(255,236,140,.75), 0 2px 6px rgba(var(--plum), .5);
+  transition: transform .25s ease, box-shadow .25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.sub:hover, .sub:focus-visible { transform: translateY(-2px) scale(1.05); box-shadow: 0 0 0 1px #fff, 0 0 14px 4px rgba(255,236,140,.95), 0 3px 8px rgba(var(--plum), .5); }
+.sub:focus-visible { outline: 2px dashed var(--glow); outline-offset: 3px; }
+
+
+/* music toggle */
+.music {
+  position: absolute; z-index: 5; top: 12px; right: 12px;
+  display: inline-flex; align-items: center; gap: .45em;
+  font-family: var(--font-display); font-size: clamp(13px, 2.6cqw, 17px);
+  color: var(--glow); background: rgba(var(--plum), .6); border: 1px solid rgba(255, 236, 140, .45);
+  padding: .4em .85em; border-radius: 999px; cursor: pointer;
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  transition: background .2s ease, box-shadow .2s ease;
+}
+.music:hover { background: rgba(var(--plum), .8); box-shadow: 0 0 10px rgba(255, 236, 140, .5); }
+.music:focus-visible { outline: 2px dashed var(--glow); outline-offset: 3px; }
+.music .bars { display: inline-flex; align-items: flex-end; gap: 2px; height: .9em; }
+.music .bars i { width: 3px; height: 30%; background: var(--glow); border-radius: 2px; }
+.music.on .bars i { animation: bar 1.2s ease-in-out infinite; }
+.music.on .bars i:nth-child(2) { animation-delay: .3s; }
+.music.on .bars i:nth-child(3) { animation-delay: .6s; }
+@keyframes bar { 0%,100% { height: 30%; } 50% { height: 100%; } }
+@media (prefers-reduced-motion: reduce) { .music.on .bars i { animation: none; height: 70%; } }
+</style>
+
+<div class="wrap">
+  <h1>Казкові сходи виховання</h1>
+  <div class="scene" id="scene" role="img" aria-label="Кам'яні сходи ведуть до будиночка в рожевих хмарах">
+    <button type="button" class="music" id="music" aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span id="musicLabel">Увімкнути мелодію</span></button>
+
+    <svg class="live" id="live" viewBox="0 0 1114 1514" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="28"/></filter>
+
+        <!-- sky: only the upper clouds, the little house is left still -->
+        <mask id="skyMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1114" height="1514">
+          <rect width="1114" height="1514" fill="url(#skyFade)"/>
+          <ellipse cx="765" cy="240" rx="175" ry="250" fill="#000" filter="url(#soft)"/>
+          <ellipse cx="640" cy="420" rx="230" ry="70" fill="#000" filter="url(#soft)"/>
+        </mask>
+        <linearGradient id="skyFade" x1="0" y1="0" x2="0" y2="1514" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#fff"/>
+          <stop offset=".17" stop-color="#fff"/>
+          <stop offset=".27" stop-color="#000"/>
+        </linearGradient>
+        <filter id="cloudMove" x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.004 0.008" numOctaves="2" seed="4" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="G">
+            <animate attributeName="scale" values="0;26;0;-26;0" dur="16s" repeatCount="indefinite"/>
+          </feDisplacementMap>
+        </filter>
+
+        <!-- meadow: only the flowers, the stone steps are left still -->
+        <mask id="meadowMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1114" height="1514">
+          <rect width="1114" height="1514" fill="url(#meadowFade)"/>
+          <polygon points="370,1215 470,1140 560,1070 700,1040 850,1040 860,1180 790,1300 600,1310 430,1260" fill="#000" filter="url(#soft)"/>
+        </mask>
+        <linearGradient id="meadowFade" x1="0" y1="0" x2="0" y2="1514" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#000"/>
+          <stop offset=".74" stop-color="#000"/>
+          <stop offset=".82" stop-color="#fff"/>
+          <stop offset="1" stop-color="#fff"/>
+        </linearGradient>
+        <filter id="sway" x="-3%" y="-3%" width="106%" height="106%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.035 0.012" numOctaves="2" seed="9" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="B">
+            <animate attributeName="scale" values="0;9;0;-9;0" dur="4.5s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1"/>
+          </feDisplacementMap>
+        </filter>
+      </defs>
+
+      <g mask="url(#skyMask)">
+        <g>
+          <animateTransform attributeName="transform" type="translate" values="0 0;14 -3;0 0;-14 3;0 0" dur="30s" repeatCount="indefinite"/>
+          <image href="bg.jpg" x="-10" y="-10" width="1134" height="1534" preserveAspectRatio="none" filter="url(#cloudMove)"/>
+        </g>
+      </g>
+      <g mask="url(#meadowMask)">
+        <image href="bg.jpg" x="0" y="0" width="1114" height="1514" preserveAspectRatio="none" filter="url(#sway)"/>
+      </g>
+    </svg>
+
+    <div class="wisp w1"></div>
+    <div class="wisp w2"></div>
+    <div class="wisp w3"></div>
+
+    <a class="step s1" href="https://www.thinglink.com/scene/2161128127982469606" target="_blank" rel="noopener">Вересневий адвент-календар</a>
+    <a class="step s2" href="https://www.thinglink.com/scene/2162144273581998566" target="_blank" rel="noopener">Жовтневий адвент-календар</a>
+    <div class="group s3">
+      <span class="step title">Періодична система листопада</span>
+      <div class="subs">
+        <a class="sub" href="https://a64151368-dot.github.io/Periodic-System-Teacher-Edition/" target="_blank" rel="noopener">для класного керівника</a>
+        <a class="sub" href="https://a64151368-dot.github.io/-Periodic-Table-for-Students/" target="_blank" rel="noopener">для учня</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var reduce = false;
+  try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  var live = document.getElementById('live');
+  if (reduce && live && live.pauseAnimations) live.pauseAnimations();
+
+  var ctx = null;
+  function chime() {
+    try {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      if (!ctx) ctx = new AC();
+      if (ctx.state === 'suspended') ctx.resume();
+      var now = ctx.currentTime;
+      var master = ctx.createGain();
+      master.gain.value = 0.22;
+      master.connect(ctx.destination);
+      // rising sparkle arpeggio, like a fairy wand
+      var notes = [1046.5, 1318.5, 1568, 2093, 2637, 3136];
+      notes.forEach(function (f, i) {
+        var t = now + i * 0.07;
+        [1, 2.01].forEach(function (mult, k) {
+          var o = ctx.createOscillator(), g = ctx.createGain();
+          o.type = 'sine';
+          o.frequency.value = f * mult;
+          var peak = k === 0 ? 0.5 : 0.12;
+          g.gain.setValueAtTime(0.0001, t);
+          g.gain.exponentialRampToValueAtTime(peak, t + 0.012);
+          g.gain.exponentialRampToValueAtTime(0.0001, t + 1.2);
+          o.connect(g); g.connect(master);
+          o.start(t); o.stop(t + 1.3);
+        });
+      });
+    } catch (e) {}
+  }
+
+  function sparkle(el) {
+    if (reduce) return;
+    var scene = document.getElementById('scene');
+    var r = el.getBoundingClientRect(), s = scene.getBoundingClientRect();
+    var cx = r.left + r.width / 2 - s.left, cy = r.top + r.height / 2 - s.top;
+    for (var i = 0; i < 16; i++) {
+      var p = document.createElement('span');
+      p.className = 'spark';
+      var a = Math.random() * Math.PI * 2, d = 40 + Math.random() * 90;
+      p.style.left = cx + 'px'; p.style.top = cy + 'px';
+      p.style.setProperty('--dx', Math.cos(a) * d + 'px');
+      p.style.setProperty('--dy', Math.sin(a) * d * 0.6 + 'px');
+      scene.appendChild(p);
+      setTimeout(function (n) { n.remove(); }.bind(null, p), 950);
+    }
+  }
+
+  document.querySelectorAll('a.step, a.sub, a.m-link').forEach(function (a) {
+    a.addEventListener('click', function () { chime(); sparkle(a); });
+  });
+})();
+</script>
+
+<script>
+/* Gentle music-box melody over a soft pad, generated live in the browser */
+(function () {
+  var btn = document.getElementById('music'), label = document.getElementById('musicLabel');
+  var AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) { btn.hidden = true; return; }
+  var ctx, master, wet, timer = null, playing = false, wanted = true, beat = 0, nextTime = 0, lastDeg = 4;
+  try { if (localStorage.getItem('stairsMusic') === 'off') wanted = false; } catch (e) {}
+
+  var BEAT = 0.82;                       /* slow, thoughtful pace */
+  function hz(m) { return 440 * Math.pow(2, (m - 69) / 12); }
+  /* D major: Dmaj7 → Bm7 → Gmaj7 → Asus4, eight beats each */
+  var chords = [
+    { root: 50, tones: [62, 66, 69, 73] },
+    { root: 47, tones: [62, 66, 69, 71] },
+    { root: 43, tones: [62, 67, 71, 66] },
+    { root: 45, tones: [62, 64, 69, 71] }
+  ];
+  var scale = [74, 76, 78, 81, 83, 86, 88, 90];   /* D pentatonic-ish, music-box register */
+
+  function build() {
+    ctx = new AC();
+    master = ctx.createGain(); master.gain.value = 0;
+    var lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 5200;
+    master.connect(lp); lp.connect(ctx.destination);
+    /* airy reverb from a decaying noise impulse */
+    var len = ctx.sampleRate * 3.5, imp = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (var c = 0; c < 2; c++) { var d = imp.getChannelData(c); for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
+    var conv = ctx.createConvolver(); conv.buffer = imp;
+    wet = ctx.createGain(); wet.gain.value = 0.55;
+    wet.connect(conv); conv.connect(master);
+  }
+  function out(node, dry) {
+    var g = ctx.createGain(); g.gain.value = dry; node.connect(g); g.connect(master); node.connect(wet);
+  }
+  function bell(t, m, vol) {
+    [[1, 1], [2.0, .22], [3.01, .07]].forEach(function (p) {
+      var o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = hz(m) * p[0];
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol * p[1], t + 0.008);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 2.6 / p[0]);
+      o.connect(g); out(g, .7); o.start(t); o.stop(t + 2.8);
+    });
+  }
+  function pad(t, ch) {
+    var dur = BEAT * 8 + 1.5;
+    ch.tones.concat([ch.root]).forEach(function (m, i) {
+      var o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = i === 4 ? 'sine' : 'triangle';
+      o.frequency.value = hz(m); o.detune.value = (i % 2 ? 4 : -4);
+      var v = i === 4 ? 0.09 : 0.022;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.linearRampToValueAtTime(v, t + 2.2);
+      g.gain.setValueAtTime(v, t + dur - 2.4);
+      g.gain.linearRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); out(g, .5); o.start(t); o.stop(t + dur + .1);
+    });
+  }
+  function schedule() {
+    while (nextTime < ctx.currentTime + 1.2) {
+      var bar = Math.floor(beat / 8) % 4, pos = beat % 8, ch = chords[bar];
+      if (pos === 0) pad(nextTime, ch);
+      /* sparse melody that wanders by small steps and rests often */
+      var play = pos === 0 || pos === 3 || (pos !== 7 && Math.random() < 0.42);
+      if (play) {
+        var step = [-2, -1, -1, 1, 1, 2, 0][Math.floor(Math.random() * 7)];
+        lastDeg = Math.max(0, Math.min(scale.length - 1, lastDeg + step));
+        var note = scale[lastDeg];
+        if (pos === 0) { /* land on a chord tone at each new chord */
+          var best = ch.tones[0] + 12, bd = 99;
+          ch.tones.forEach(function (tn) { [tn + 12, tn + 24].forEach(function (x) { var dd = Math.abs(x - note); if (dd < bd) { bd = dd; best = x; } }); });
+          note = best;
+        }
+        bell(nextTime + (Math.random() * 0.03), note, pos === 0 ? 0.16 : 0.11);
+        if (Math.random() < 0.12) bell(nextTime + BEAT / 2, note + 12, 0.05);
+      }
+      nextTime += BEAT; beat++;
+    }
+  }
+  function setUI() {
+    btn.classList.toggle('on', playing);
+    btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    label.textContent = playing ? 'Вимкнути мелодію' : 'Увімкнути мелодію';
+  }
+  function start() {
+    try {
+      if (!ctx) build();
+      if (ctx.state === 'suspended') ctx.resume();
+      if (playing) return;
+      playing = true;
+      nextTime = ctx.currentTime + 0.15;
+      master.gain.cancelScheduledValues(ctx.currentTime);
+      master.gain.setValueAtTime(master.gain.value, ctx.currentTime);
+      master.gain.linearRampToValueAtTime(0.9, ctx.currentTime + 3);
+      schedule(); timer = setInterval(schedule, 300);
+      setUI();
+    } catch (e) {}
+  }
+  function stop(fast) {
+    if (!ctx || !playing) return;
+    playing = false; clearInterval(timer); timer = null;
+    var t = ctx.currentTime;
+    master.gain.cancelScheduledValues(t);
+    master.gain.setValueAtTime(master.gain.value, t);
+    master.gain.linearRampToValueAtTime(0, t + (fast ? 0.6 : 1.5));
+    setUI();
+  }
+
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (playing) { wanted = false; stop(); } else { wanted = true; start(); }
+    try { localStorage.setItem('stairsMusic', wanted ? 'on' : 'off'); } catch (er) {}
+  });
+  /* the browser allows sound only after a first touch, so start on the first tap on the page */
+  document.addEventListener('pointerdown', function first(e) {
+    if (e.target.closest('a, .music')) return;
+    document.removeEventListener('pointerdown', first);
+    if (wanted && !playing) start();
+  });
+  /* leaving for an advent calendar or the periodic table: the melody goes quiet */
+  document.querySelectorAll('a[href^="http"]').forEach(function (a) {
+    a.addEventListener('click', function () { stop(true); });
+  });
+  /* coming back to the stairs: the melody returns if it was on */
+  var stoppedByLeaving = false;
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { if (playing) { stoppedByLeaving = true; stop(true); } }
+    else if (wanted && ctx) { stoppedByLeaving = false; start(); }
+  });
+  window.addEventListener('focus', function () { if (wanted && ctx && !playing && !document.hidden) start(); });
+  setUI();
+})();
+</script>
+
+</body></html>
