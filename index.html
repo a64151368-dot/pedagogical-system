@@ -1,7 +1,7 @@
-<title>Казкові сходи виховання</title>
+<title>Інтерактивна виховна система</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600&family=Philosopher:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&family=Philosopher:wght@700&display=swap">
 <style>
 /* Layout: the night study scene as a framed picture; on wide screens the three holographic panels float over the night city beside the moon, on narrow screens they line up under the picture */
 :root {
@@ -37,7 +37,7 @@ h1 span { color: var(--ember); text-shadow: 0 0 18px rgba(var(--ember-rgb), .6);
 .art {
   position: relative; width: 100%; max-width: 100%; aspect-ratio: 1672 / 941;
   border-radius: 18px; overflow: hidden;
-  background: url("jku79bb3.png") center / cover no-repeat var(--night);
+  background: url("https://raw.githubusercontent.com/a64151368-dot/pedagogical-system/main/jku79bb3.png") center / cover no-repeat var(--night);
   box-shadow: 0 20px 60px rgba(0,0,0,.6), 0 0 0 1px rgba(var(--holo-soft), .25), 0 0 40px rgba(var(--holo-soft), .12);
 }
 .art canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
@@ -77,39 +77,42 @@ h1 span { color: var(--ember); text-shadow: 0 0 18px rgba(var(--ember-rgb), .6);
 .panel {
   position: relative; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 12px;
   padding: 12px 16px 12px 12px; border-radius: 14px; text-decoration: none; color: var(--ink);
-  background: linear-gradient(160deg, rgba(60,80,170,.42), rgba(25,30,80,.55));
-  border: 1px solid rgba(var(--holo-soft), .6);
-  box-shadow: 0 0 0 1px rgba(var(--holo-soft), .12) inset, 0 0 18px rgba(var(--holo-soft), .35), inset 0 0 22px rgba(var(--holo-soft), .18);
+  background: linear-gradient(160deg, rgba(34,46,120,.9), rgba(12,14,48,.92));
+  border: 1.5px solid rgba(160,195,255,.85);
+  box-shadow: 0 0 0 1px rgba(var(--holo-soft), .2) inset, 0 0 22px rgba(var(--holo-soft), .55), 0 6px 18px rgba(0,0,0,.45);
+  animation: beckon 3.6s ease-in-out infinite;
   backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
   -webkit-tap-highlight-color: transparent; min-width: 0;
 }
 /* amber light trail along the lower edge, like the swirls in the picture */
+.panel:nth-child(2) { animation-delay: 1.2s; } .panel:nth-child(3) { animation-delay: 2.4s; }
+@keyframes beckon { 0%,100% { box-shadow: 0 0 0 1px rgba(var(--holo-soft), .2) inset, 0 0 18px rgba(var(--holo-soft), .45), 0 6px 18px rgba(0,0,0,.45); } 50% { box-shadow: 0 0 0 1px rgba(var(--holo-soft), .3) inset, 0 0 32px rgba(var(--holo-soft), .8), 0 6px 18px rgba(0,0,0,.45); } }
 .panel::after {
   content: ""; position: absolute; left: 14px; right: 14px; bottom: -1px; height: 2px; border-radius: 2px;
   background: linear-gradient(90deg, transparent, var(--ember) 30%, #fff1d8 50%, var(--ember) 70%, transparent);
-  box-shadow: 0 0 8px rgba(var(--ember-rgb), .9); opacity: .75; transform: scaleX(.6);
+  box-shadow: 0 0 8px rgba(var(--ember-rgb), .9); opacity: .9; transform: scaleX(.7);
   transition: transform .35s ease, opacity .35s ease;
 }
 a.panel:hover, a.panel:focus-visible {
-  transform: translateY(-3px); border-color: rgba(var(--ember-rgb), .85);
-  box-shadow: 0 0 0 1px rgba(var(--ember-rgb), .2) inset, 0 0 26px rgba(var(--ember-rgb), .45), inset 0 0 22px rgba(var(--holo-soft), .2);
+  transform: translateY(-3px) scale(1.02); border-color: var(--ember); animation: none;
+  box-shadow: 0 0 0 1px rgba(var(--ember-rgb), .3) inset, 0 0 30px rgba(var(--ember-rgb), .6), 0 6px 18px rgba(0,0,0,.45);
 }
 a.panel:hover::after, a.panel:focus-visible::after { transform: scaleX(1); opacity: 1; }
 .panel:focus-visible, .pill:focus-visible, .music:focus-visible { outline: 2px dashed var(--ember); outline-offset: 3px; }
 .icon {
-  width: 46px; height: 46px; border-radius: 10px; display: grid; place-items: center;
+  width: 52px; height: 52px; border-radius: 10px; display: grid; place-items: center;
   border: 1px solid rgba(var(--holo-soft), .55); background: rgba(var(--holo-soft), .12);
   box-shadow: inset 0 0 12px rgba(var(--holo-soft), .35);
 }
-.icon svg { width: 28px; height: 28px; stroke: var(--holo); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 3px rgba(var(--holo-soft), .9)); }
+.icon svg { width: 32px; height: 32px; stroke: var(--holo); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 3px rgba(var(--holo-soft), .9)); }
 .txt { display: grid; gap: 2px; min-width: 0; }
-.label { font-weight: 600; font-size: 1.06rem; line-height: 1.2; text-wrap: balance; }
-.meta { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--holo); }
+.label { font-weight: 800; font-size: 1.22rem; line-height: 1.18; color: #ffffff; text-wrap: balance; text-shadow: 0 1px 2px rgba(0,0,0,.8), 0 0 10px rgba(var(--holo-soft), .45); }
+.meta { font-weight: 700; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ember); text-shadow: 0 1px 2px rgba(0,0,0,.7); }
 .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
 .pill {
-  font-family: var(--font-ui); font-weight: 600; font-size: .84rem; text-decoration: none; white-space: nowrap;
-  color: #2a1404; padding: .32em .9em; border-radius: 999px;
+  font-family: var(--font-ui); font-weight: 800; font-size: .95rem; text-decoration: none; white-space: nowrap;
+  color: #241002; padding: .42em 1.05em; border-radius: 999px;
   background: linear-gradient(180deg, #ffe2b8, var(--ember) 65%, #f08a2c);
   box-shadow: 0 0 0 1px rgba(255,240,215,.6), 0 0 10px rgba(var(--ember-rgb), .7);
   transition: transform .2s ease, box-shadow .2s ease;
@@ -120,15 +123,15 @@ a.panel:hover::after, a.panel:focus-visible::after { transform: scaleX(1); opaci
 /* wide screens: panels float over the city between the hologram columns */
 @container scene (min-width: 980px) {
   .panels {
-    position: absolute; left: 61.6%; top: 23%; width: 20.2%;
+    position: absolute; left: 61%; top: 22%; width: 21%;
     grid-template-columns: 1fr; gap: 10px;
   }
   .panel { padding: 10px 12px 10px 10px; gap: 10px; }
-  .icon { width: 40px; height: 40px; }
-  .icon svg { width: 24px; height: 24px; }
-  .label { font-size: .98rem; }
-  .meta { font-size: .7rem; }
-  .pill { font-size: .78rem; }
+  .icon { width: 42px; height: 42px; }
+  .icon svg { width: 26px; height: 26px; }
+  .label { font-size: 1.1rem; }
+  .meta { font-size: .72rem; }
+  .pill { font-size: .84rem; padding: .38em .9em; }
 }
 
 /* music toggle */
@@ -162,14 +165,14 @@ a.panel:hover::after, a.panel:focus-visible::after { transform: scaleX(1); opaci
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .halo, .holo-glow, .holo-glow::after, .music.on .bars i { animation: none; }
+  .halo, .holo-glow, .holo-glow::after, .music.on .bars i, .panel { animation: none; }
   .holo-glow::after { display: none; }
   .music.on .bars i { height: 70%; }
 }
 </style>
 
 <div class="wrap">
-  <h1>Казкові сходи <span>виховання</span></h1>
+  <h1>Інтерактивна <span>виховна</span> система</h1>
   <div class="scene" id="scene">
     <div class="art" role="img" aria-label="Нічний кабінет: вчителька в масці біля ноутбука, сова на полиці, місяць і голограми з формулами над нічним містом">
       <canvas id="sky" aria-hidden="true"></canvas>
