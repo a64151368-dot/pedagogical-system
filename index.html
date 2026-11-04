@@ -1,98 +1,159 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Казкові сходи виховання</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600&family=Philosopher:wght@700&display=swap">
 <style>
-/* Layout: one framed scene; animated sky band and meadow band layered over the still painting; glowing script labels on the steps */
+/* Layout: the night study scene as a framed picture; on wide screens the three holographic panels float over the night city beside the moon, on narrow screens they line up under the picture */
 :root {
-  --sky: #2a1830;
-  --dusk: #4a2a45;
-  --glow: #fff2a0;
-  --glow-deep: #ffd84f;
-  --plum: 38, 14, 34;
-  --rose: #f6c6d6;
-  --font-display: "Lobster", "Georgia", serif;
+  --night: #100f2a;
+  --night-2: #1d1a48;
+  --holo: #8fb4ff;
+  --holo-soft: 120, 165, 255;
+  --ink: #e8efff;
+  --ember: #ffb15a;
+  --ember-rgb: 255, 170, 80;
+  --font-display: "Philosopher", "Georgia", serif;
+  --font-ui: "Exo 2", "Segoe UI", system-ui, sans-serif;
   color-scheme: dark;
 }
 html, body { min-height: 100%; }
 body {
-  background: radial-gradient(ellipse at 50% 0%, var(--dusk), var(--sky) 70%);
-  color: var(--rose);
+  background: radial-gradient(ellipse at 70% 0%, var(--night-2), var(--night) 65%);
+  color: var(--ink);
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 20px 28px;
-  font-family: var(--font-display);
+  font-family: var(--font-ui);
 }
-.wrap { max-width: 760px; margin: 0 auto; display: grid; gap: 14px; }
+.wrap { max-width: 1160px; margin: 0 auto; display: grid; gap: 16px; }
 h1 {
-  margin: 0; text-align: center; font-weight: 400;
-  font-size: clamp(1.7rem, 5.5vw, 2.8rem); color: var(--rose);
-  text-shadow: 0 0 18px rgba(255, 190, 220, .55); text-wrap: balance;
+  margin: 0; text-align: center; font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.6rem, 4.6vw, 2.7rem); letter-spacing: .01em; color: var(--ink);
+  text-shadow: 0 0 22px rgba(var(--holo-soft), .55); text-wrap: balance;
 }
-.scene {
-  position: relative; width: 100%; max-width: 100%;
-  aspect-ratio: 1114 / 1514; container-type: inline-size;
+h1 span { color: var(--ember); text-shadow: 0 0 18px rgba(var(--ember-rgb), .6); }
+
+.scene { position: relative; container-type: inline-size; container-name: scene; display: grid; gap: 14px; }
+.art {
+  position: relative; width: 100%; max-width: 100%; aspect-ratio: 1672 / 941;
   border-radius: 18px; overflow: hidden;
-  background: url("bg.jpg") center / cover no-repeat;
-  box-shadow: 0 20px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(255,220,235,.15);
+  background: url("night.jpg") center / cover no-repeat var(--night);
+  box-shadow: 0 20px 60px rgba(0,0,0,.6), 0 0 0 1px rgba(var(--holo-soft), .25), 0 0 40px rgba(var(--holo-soft), .12);
 }
-.scene svg.live { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.art canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 
-/* soft wisps drifting across the top sky */
-.wisp {
-  position: absolute; border-radius: 50%; pointer-events: none;
-  background: radial-gradient(ellipse at center, rgba(255,214,228,.45), rgba(255,200,220,.18) 45%, transparent 70%);
-  filter: blur(6px);
-  animation: drift linear infinite;
+/* moon halo and breathing holograms over the still painting */
+.halo, .holo-glow { position: absolute; pointer-events: none; border-radius: 50%; transform: translate(-50%, -50%); mix-blend-mode: screen; }
+.halo {
+  left: 75.6%; top: 11.6%; width: 17%; aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(200,220,255,.35) 0%, rgba(160,190,255,.14) 35%, transparent 65%);
+  animation: breathe 7s ease-in-out infinite;
 }
-.w1 { top: 2%;  width: 46%; height: 7%;  animation-duration: 48s; }
-.w2 { top: 9%;  width: 34%; height: 5%;  animation-duration: 62s; animation-delay: -20s; opacity: .8; }
-.w3 { top: 15%; width: 40%; height: 6%;  animation-duration: 55s; animation-delay: -38s; opacity: .7; }
-@keyframes drift { from { left: -50%; } to { left: 105%; } }
+.holo-glow {
+  border-radius: 14px; transform: none;
+  background: radial-gradient(ellipse at center, rgba(var(--holo-soft), .32), rgba(var(--holo-soft), .08) 60%, transparent 80%);
+  animation: flicker 5s ease-in-out infinite;
+}
+.holo-glow::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(180deg, transparent 0%, rgba(190,215,255,.35) 50%, transparent 100%) no-repeat;
+  background-size: 100% 22%; animation: scan 4.5s linear infinite; opacity: .7;
+}
+.g1 { left: 44.8%; top: 5.9%;  width: 15.5%; height: 18.5%; }
+.g2 { left: 45.7%; top: 40%;   width: 11.6%; height: 17%;  animation-delay: -1.3s; }
+.g3 { left: 83.5%; top: 8.1%;  width: 11.3%; height: 20.3%; animation-delay: -2.4s; }
+.g4 { left: 86.7%; top: 31.1%; width: 10%;   height: 18.1%; animation-delay: -3.1s; }
+.g5 { left: 82%;   top: 53.6%; width: 13.4%; height: 17.2%; animation-delay: -.7s; }
+.g1::after { animation-delay: -1s; } .g3::after { animation-delay: -2s; } .g5::after { animation-delay: -3s; }
+@keyframes breathe { 0%,100% { opacity: .65; transform: translate(-50%,-50%) scale(1); } 50% { opacity: 1; transform: translate(-50%,-50%) scale(1.08); } }
+@keyframes flicker { 0%,100% { opacity: .35; } 45% { opacity: .9; } 50% { opacity: .55; } 55% { opacity: .95; } }
+@keyframes scan { from { background-position: 0 -30%; } to { background-position: 0 130%; } }
 
-/* glowing step labels */
-.step {
-  position: absolute; transform: translate(-50%, -50%);
-  display: inline-block; padding: .18em .75em .42em;
-  font-family: var(--font-display); font-weight: 400;
-  font-size: clamp(17px, 5.2cqw, 38px); line-height: 1.1; letter-spacing: .01em;
-  color: var(--glow); text-decoration: none; white-space: nowrap;
-  border-radius: 999px;
-  background: radial-gradient(ellipse at center, rgba(var(--plum), .72) 0%, rgba(var(--plum), .55) 55%, rgba(var(--plum), 0) 78%);
-  text-shadow:
-    0 0 1px rgba(var(--plum), 1), 0 1px 2px rgba(var(--plum), .95), 0 0 3px rgba(var(--plum), .9),
-    0 0 10px rgba(255,232,120,.75), 0 0 20px rgba(255,216,90,.45);
-  animation: glow 3s ease-in-out infinite;
-  transition: transform .25s ease, color .25s ease;
+/* holographic panels = navigation */
+.panels {
+  display: grid; gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+}
+.panel {
+  position: relative; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 12px;
+  padding: 12px 16px 12px 12px; border-radius: 14px; text-decoration: none; color: var(--ink);
+  background: linear-gradient(160deg, rgba(60,80,170,.42), rgba(25,30,80,.55));
+  border: 1px solid rgba(var(--holo-soft), .6);
+  box-shadow: 0 0 0 1px rgba(var(--holo-soft), .12) inset, 0 0 18px rgba(var(--holo-soft), .35), inset 0 0 22px rgba(var(--holo-soft), .18);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  -webkit-tap-highlight-color: transparent; min-width: 0;
+}
+/* amber light trail along the lower edge, like the swirls in the picture */
+.panel::after {
+  content: ""; position: absolute; left: 14px; right: 14px; bottom: -1px; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--ember) 30%, #fff1d8 50%, var(--ember) 70%, transparent);
+  box-shadow: 0 0 8px rgba(var(--ember-rgb), .9); opacity: .75; transform: scaleX(.6);
+  transition: transform .35s ease, opacity .35s ease;
+}
+a.panel:hover, a.panel:focus-visible {
+  transform: translateY(-3px); border-color: rgba(var(--ember-rgb), .85);
+  box-shadow: 0 0 0 1px rgba(var(--ember-rgb), .2) inset, 0 0 26px rgba(var(--ember-rgb), .45), inset 0 0 22px rgba(var(--holo-soft), .2);
+}
+a.panel:hover::after, a.panel:focus-visible::after { transform: scaleX(1); opacity: 1; }
+.panel:focus-visible, .pill:focus-visible, .music:focus-visible { outline: 2px dashed var(--ember); outline-offset: 3px; }
+.icon {
+  width: 46px; height: 46px; border-radius: 10px; display: grid; place-items: center;
+  border: 1px solid rgba(var(--holo-soft), .55); background: rgba(var(--holo-soft), .12);
+  box-shadow: inset 0 0 12px rgba(var(--holo-soft), .35);
+}
+.icon svg { width: 28px; height: 28px; stroke: var(--holo); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 3px rgba(var(--holo-soft), .9)); }
+.txt { display: grid; gap: 2px; min-width: 0; }
+.label { font-weight: 600; font-size: 1.06rem; line-height: 1.2; text-wrap: balance; }
+.meta { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--holo); }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.pill {
+  font-family: var(--font-ui); font-weight: 600; font-size: .84rem; text-decoration: none; white-space: nowrap;
+  color: #2a1404; padding: .32em .9em; border-radius: 999px;
+  background: linear-gradient(180deg, #ffe2b8, var(--ember) 65%, #f08a2c);
+  box-shadow: 0 0 0 1px rgba(255,240,215,.6), 0 0 10px rgba(var(--ember-rgb), .7);
+  transition: transform .2s ease, box-shadow .2s ease;
   -webkit-tap-highlight-color: transparent;
 }
-.step::after {
-  content: ""; position: absolute; left: 12%; right: 12%; bottom: .14em; height: 2px; border-radius: 2px;
-  background: linear-gradient(90deg, transparent, var(--glow) 18%, #fff 50%, var(--glow) 82%, transparent);
-  box-shadow: 0 0 6px rgba(255,230,120,.9);
-  transition: transform .3s ease;
+.pill:hover, .pill:focus-visible { transform: translateY(-2px); box-shadow: 0 0 0 1px #fff4e2, 0 0 16px 3px rgba(var(--ember-rgb), .85); }
+
+/* wide screens: panels float over the city between the hologram columns */
+@container scene (min-width: 980px) {
+  .panels {
+    position: absolute; left: 61.6%; top: 23%; width: 20.2%;
+    grid-template-columns: 1fr; gap: 10px;
+  }
+  .panel { padding: 10px 12px 10px 10px; gap: 10px; }
+  .icon { width: 40px; height: 40px; }
+  .icon svg { width: 24px; height: 24px; }
+  .label { font-size: .98rem; }
+  .meta { font-size: .7rem; }
+  .pill { font-size: .78rem; }
 }
-.step::before {
-  content: ""; position: absolute; left: 30%; right: 30%; bottom: -.02em; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--glow-deep), transparent); opacity: .9;
+
+/* music toggle */
+.music {
+  position: absolute; z-index: 5; top: 12px; left: 12px;
+  display: inline-flex; align-items: center; gap: .5em;
+  font-family: var(--font-ui); font-weight: 500; font-size: clamp(12px, 1.6cqw, 15px);
+  color: var(--ink); background: rgba(20,24,70,.6); border: 1px solid rgba(var(--holo-soft), .55);
+  padding: .45em .9em; border-radius: 999px; cursor: pointer;
+  box-shadow: 0 0 12px rgba(var(--holo-soft), .3);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  transition: background .2s ease, box-shadow .2s ease, border-color .2s ease;
 }
-.step:hover, .step:focus-visible { transform: translate(-50%, -50%) scale(1.06); color: #fffbe0; }
-.step:hover::after, .step:focus-visible::after { transform: scaleX(1.08); }
-.step:focus-visible { outline: 2px dashed var(--glow); outline-offset: 4px; }
-.s1 { left: 58%; top: 70.5%; }
-.s2 { left: 46%; top: 58.5%; animation-delay: 1s; }
-.s3 { left: 42%; top: 43.5%; }
-.s3 .step { animation-delay: 2s; }
-@keyframes glow {
-  0%,100% { color: var(--glow); }
-  50% { color: #fffbe0; }
-}
+.music:hover { background: rgba(30,36,95,.8); border-color: rgba(var(--ember-rgb), .8); box-shadow: 0 0 14px rgba(var(--ember-rgb), .5); }
+.music .bars { display: inline-flex; align-items: flex-end; gap: 2px; height: .9em; }
+.music .bars i { width: 3px; height: 30%; background: var(--ember); border-radius: 2px; }
+.music.on .bars i { animation: bar 1.2s ease-in-out infinite; }
+.music.on .bars i:nth-child(2) { animation-delay: .3s; }
+.music.on .bars i:nth-child(3) { animation-delay: .6s; }
+@keyframes bar { 0%,100% { height: 30%; } 50% { height: 100%; } }
 
 /* sparkle burst on click */
 .spark {
-  position: absolute; width: 8px; height: 8px; border-radius: 50%; pointer-events: none;
-  background: radial-gradient(circle, #fff, var(--glow) 40%, transparent 70%);
+  position: absolute; z-index: 6; width: 7px; height: 7px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, #fff, var(--ember) 45%, transparent 70%);
   animation: burst .9s ease-out forwards;
 }
 @keyframes burst {
@@ -101,128 +162,116 @@ h1 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .step, .wisp { animation: none; }
-  .wisp { display: none; }
+  .halo, .holo-glow, .holo-glow::after, .music.on .bars i { animation: none; }
+  .holo-glow::after { display: none; }
+  .music.on .bars i { height: 70%; }
 }
-
-/* November group: one heading, two role buttons */
-.group { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: .35em; font-size: clamp(17px, 5.2cqw, 38px); }
-.group .step { position: relative; transform: none; cursor: default; }
-.group .step:hover { transform: none; }
-.subs { display: flex; gap: .6em; flex-wrap: nowrap; }
-.sub {
-  font-family: var(--font-display); font-size: .62em; white-space: nowrap; text-decoration: none;
-  color: #3d1d0c; padding: .3em .9em .38em; border-radius: 999px;
-  background: linear-gradient(180deg, #fffbe2, var(--glow) 60%, var(--glow-deep));
-  box-shadow: 0 0 0 1px rgba(255,255,255,.7), 0 0 8px 2px rgba(255,236,140,.75), 0 2px 6px rgba(var(--plum), .5);
-  transition: transform .25s ease, box-shadow .25s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-.sub:hover, .sub:focus-visible { transform: translateY(-2px) scale(1.05); box-shadow: 0 0 0 1px #fff, 0 0 14px 4px rgba(255,236,140,.95), 0 3px 8px rgba(var(--plum), .5); }
-.sub:focus-visible { outline: 2px dashed var(--glow); outline-offset: 3px; }
-
-
-/* music toggle */
-.music {
-  position: absolute; z-index: 5; top: 12px; right: 12px;
-  display: inline-flex; align-items: center; gap: .45em;
-  font-family: var(--font-display); font-size: clamp(13px, 2.6cqw, 17px);
-  color: var(--glow); background: rgba(var(--plum), .6); border: 1px solid rgba(255, 236, 140, .45);
-  padding: .4em .85em; border-radius: 999px; cursor: pointer;
-  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-  transition: background .2s ease, box-shadow .2s ease;
-}
-.music:hover { background: rgba(var(--plum), .8); box-shadow: 0 0 10px rgba(255, 236, 140, .5); }
-.music:focus-visible { outline: 2px dashed var(--glow); outline-offset: 3px; }
-.music .bars { display: inline-flex; align-items: flex-end; gap: 2px; height: .9em; }
-.music .bars i { width: 3px; height: 30%; background: var(--glow); border-radius: 2px; }
-.music.on .bars i { animation: bar 1.2s ease-in-out infinite; }
-.music.on .bars i:nth-child(2) { animation-delay: .3s; }
-.music.on .bars i:nth-child(3) { animation-delay: .6s; }
-@keyframes bar { 0%,100% { height: 30%; } 50% { height: 100%; } }
-@media (prefers-reduced-motion: reduce) { .music.on .bars i { animation: none; height: 70%; } }
 </style>
 
 <div class="wrap">
-  <h1>Казкові сходи виховання</h1>
-  <div class="scene" id="scene" role="img" aria-label="Кам'яні сходи ведуть до будиночка в рожевих хмарах">
-    <button type="button" class="music" id="music" aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span id="musicLabel">Увімкнути мелодію</span></button>
-
-    <svg class="live" id="live" viewBox="0 0 1114 1514" preserveAspectRatio="none" aria-hidden="true">
-      <defs>
-        <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="28"/></filter>
-
-        <!-- sky: only the upper clouds, the little house is left still -->
-        <mask id="skyMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1114" height="1514">
-          <rect width="1114" height="1514" fill="url(#skyFade)"/>
-          <ellipse cx="765" cy="240" rx="175" ry="250" fill="#000" filter="url(#soft)"/>
-          <ellipse cx="640" cy="420" rx="230" ry="70" fill="#000" filter="url(#soft)"/>
-        </mask>
-        <linearGradient id="skyFade" x1="0" y1="0" x2="0" y2="1514" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stop-color="#fff"/>
-          <stop offset=".17" stop-color="#fff"/>
-          <stop offset=".27" stop-color="#000"/>
-        </linearGradient>
-        <filter id="cloudMove" x="-5%" y="-5%" width="110%" height="110%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.004 0.008" numOctaves="2" seed="4" result="n"/>
-          <feDisplacementMap in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="G">
-            <animate attributeName="scale" values="0;26;0;-26;0" dur="16s" repeatCount="indefinite"/>
-          </feDisplacementMap>
-        </filter>
-
-        <!-- meadow: only the flowers, the stone steps are left still -->
-        <mask id="meadowMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1114" height="1514">
-          <rect width="1114" height="1514" fill="url(#meadowFade)"/>
-          <polygon points="370,1215 470,1140 560,1070 700,1040 850,1040 860,1180 790,1300 600,1310 430,1260" fill="#000" filter="url(#soft)"/>
-        </mask>
-        <linearGradient id="meadowFade" x1="0" y1="0" x2="0" y2="1514" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stop-color="#000"/>
-          <stop offset=".74" stop-color="#000"/>
-          <stop offset=".82" stop-color="#fff"/>
-          <stop offset="1" stop-color="#fff"/>
-        </linearGradient>
-        <filter id="sway" x="-3%" y="-3%" width="106%" height="106%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.035 0.012" numOctaves="2" seed="9" result="n"/>
-          <feDisplacementMap in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="B">
-            <animate attributeName="scale" values="0;9;0;-9;0" dur="4.5s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1"/>
-          </feDisplacementMap>
-        </filter>
-      </defs>
-
-      <g mask="url(#skyMask)">
-        <g>
-          <animateTransform attributeName="transform" type="translate" values="0 0;14 -3;0 0;-14 3;0 0" dur="30s" repeatCount="indefinite"/>
-          <image href="bg.jpg" x="-10" y="-10" width="1134" height="1534" preserveAspectRatio="none" filter="url(#cloudMove)"/>
-        </g>
-      </g>
-      <g mask="url(#meadowMask)">
-        <image href="bg.jpg" x="0" y="0" width="1114" height="1514" preserveAspectRatio="none" filter="url(#sway)"/>
-      </g>
-    </svg>
-
-    <div class="wisp w1"></div>
-    <div class="wisp w2"></div>
-    <div class="wisp w3"></div>
-
-    <a class="step s1" href="https://www.thinglink.com/scene/2161128127982469606" target="_blank" rel="noopener">Вересневий адвент-календар</a>
-    <a class="step s2" href="https://www.thinglink.com/scene/2162144273581998566" target="_blank" rel="noopener">Жовтневий адвент-календар</a>
-    <div class="group s3">
-      <span class="step title">Періодична система листопада</span>
-      <div class="subs">
-        <a class="sub" href="https://a64151368-dot.github.io/Periodic-System-Teacher-Edition/" target="_blank" rel="noopener">для класного керівника</a>
-        <a class="sub" href="https://a64151368-dot.github.io/-Periodic-Table-for-Students/" target="_blank" rel="noopener">для учня</a>
-      </div>
+  <h1>Казкові сходи <span>виховання</span></h1>
+  <div class="scene" id="scene">
+    <div class="art" role="img" aria-label="Нічний кабінет: вчителька в масці біля ноутбука, сова на полиці, місяць і голограми з формулами над нічним містом">
+      <canvas id="sky" aria-hidden="true"></canvas>
+      <div class="halo" aria-hidden="true"></div>
+      <div class="holo-glow g1" aria-hidden="true"></div>
+      <div class="holo-glow g2" aria-hidden="true"></div>
+      <div class="holo-glow g3" aria-hidden="true"></div>
+      <div class="holo-glow g4" aria-hidden="true"></div>
+      <div class="holo-glow g5" aria-hidden="true"></div>
+      <button type="button" class="music" id="music" aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span id="musicLabel">Увімкнути мелодію</span></button>
     </div>
+
+    <nav class="panels" aria-label="Матеріали за місяцями">
+      <a class="panel" href="https://www.thinglink.com/scene/2161128127982469606" target="_blank" rel="noopener">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 16.5h.01M12 16.5h.01"/></svg></span>
+        <span class="txt"><span class="meta">Вересень</span><span class="label">Вересневий адвент-календар</span></span>
+      </a>
+      <a class="panel" href="https://www.thinglink.com/scene/2162144273581998566" target="_blank" rel="noopener">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="M12 12.5c-2 1.2-2.4 3.6-.8 5 .9-1.4 2.6-2 2.6-2s-.2 1.6-1.8 2c2.2.3 3.6-1.6 3-3.8-1-.2-2.2-.4-3-1.2z"/></svg></span>
+        <span class="txt"><span class="meta">Жовтень</span><span class="label">Жовтневий адвент-календар</span></span>
+      </a>
+      <div class="panel">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(-60 12 12)"/></svg></span>
+        <span class="txt"><span class="meta">Листопад</span><span class="label">Періодична система листопада</span>
+          <span class="pills">
+            <a class="pill" href="https://a64151368-dot.github.io/Periodic-System-Teacher-Edition/" target="_blank" rel="noopener">для класного керівника</a>
+            <a class="pill" href="https://a64151368-dot.github.io/-Periodic-Table-for-Students/" target="_blank" rel="noopener">для учня</a>
+          </span>
+        </span>
+      </div>
+    </nav>
   </div>
 </div>
 
 <script>
+/* twinkling stars in the sky and amber motes drifting up from the light trails */
 (function () {
   var reduce = false;
   try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
-  var live = document.getElementById('live');
-  if (reduce && live && live.pauseAnimations) live.pauseAnimations();
+  var cv = document.getElementById('sky'), c = cv.getContext('2d');
+  var W = 0, H = 0, dpr = 1, stars = [], motes = [];
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  // sky regions free of the girl and shelves (fractions of the picture)
+  function skyPoint() {
+    for (var k = 0; k < 20; k++) {
+      var x = rnd(.36, 1), y = rnd(0, .48);
+      var inPanel = (x > .44 && x < .61 && (y < .25 || (y > .39 && y < .58))) || (x > .81 && y > .07);
+      var inMoon = Math.hypot(x - .756, (y - .116) * .56) < .05;
+      if (!inPanel && !inMoon) return [x, y];
+    }
+    return [rnd(.62, .8), rnd(.02, .3)];
+  }
+  function seed() {
+    stars = [];
+    for (var i = 0; i < 70; i++) { var p = skyPoint(); stars.push({ x: p[0], y: p[1], r: rnd(.4, 1.3), ph: rnd(0, 6.28), sp: rnd(.6, 1.8) }); }
+    motes = [];
+    for (var j = 0; j < 26; j++) motes.push(newMote(true));
+  }
+  function newMote(anywhere) {
+    // rise from the warm swirls: lower left books, the laptop, the pencil cup on the right
+    var src = [[.05, .2, .62, .95], [.42, .62, .82, .98], [.82, 1, .55, .95]][Math.floor(Math.random() * 3)];
+    return { x: rnd(src[0], src[1]), y: anywhere ? rnd(.3, src[3]) : rnd(src[2], src[3]), vy: rnd(.012, .03), dx: rnd(-.006, .006), r: rnd(.8, 2), life: rnd(0, 1), ph: rnd(0, 6.28) };
+  }
+  function size() {
+    var r = cv.getBoundingClientRect(); dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  var last = 0;
+  function frame(t) {
+    var dt = Math.min(.05, (t - last) / 1000 || 0); last = t;
+    c.clearRect(0, 0, W, H);
+    var k = W / 1000;
+    stars.forEach(function (s) {
+      var a = reduce ? .7 : .35 + .65 * Math.pow((Math.sin(t / 1000 * s.sp + s.ph) + 1) / 2, 2);
+      c.globalAlpha = a; c.fillStyle = '#e6eeff';
+      c.beginPath(); c.arc(s.x * W, s.y * H, s.r * k + .3, 0, 6.283); c.fill();
+      if (s.r > 1.1 && a > .85) { c.globalAlpha = a * .5; c.fillRect(s.x * W - 3 * k, s.y * H - .3, 6 * k, .6); c.fillRect(s.x * W - .3, s.y * H - 3 * k, .6, 6 * k); }
+    });
+    if (!reduce) {
+      motes.forEach(function (m, i) {
+        m.y -= m.vy * dt; m.x += (m.dx + Math.sin(t / 900 + m.ph) * .004) * dt; m.life += dt * .18;
+        var a = Math.sin(Math.min(1, m.life) * Math.PI);
+        if (m.life >= 1 || m.y < .25) { motes[i] = newMote(false); motes[i].life = 0; return; }
+        var g = c.createRadialGradient(m.x * W, m.y * H, 0, m.x * W, m.y * H, m.r * 3 * k + 2);
+        g.addColorStop(0, 'rgba(255,236,200,' + a + ')'); g.addColorStop(.4, 'rgba(255,170,80,' + a * .6 + ')'); g.addColorStop(1, 'rgba(255,150,60,0)');
+        c.globalAlpha = 1; c.fillStyle = g;
+        c.beginPath(); c.arc(m.x * W, m.y * H, m.r * 3 * k + 2, 0, 6.283); c.fill();
+      });
+      requestAnimationFrame(frame);
+    }
+    c.globalAlpha = 1;
+  }
+  size(); seed();
+  window.addEventListener('resize', function () { size(); if (reduce) frame(0); });
+  requestAnimationFrame(frame);
+})();
 
+/* chime and sparkle on every link */
+(function () {
+  var reduce = false;
+  try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
   var ctx = null;
   function chime() {
     try {
@@ -230,37 +279,28 @@ h1 {
       if (!AC) return;
       if (!ctx) ctx = new AC();
       if (ctx.state === 'suspended') ctx.resume();
-      var now = ctx.currentTime;
-      var master = ctx.createGain();
-      master.gain.value = 0.22;
-      master.connect(ctx.destination);
-      // rising sparkle arpeggio, like a fairy wand
-      var notes = [1046.5, 1318.5, 1568, 2093, 2637, 3136];
-      notes.forEach(function (f, i) {
+      var now = ctx.currentTime, master = ctx.createGain();
+      master.gain.value = 0.22; master.connect(ctx.destination);
+      [1046.5, 1318.5, 1568, 2093, 2637, 3136].forEach(function (f, i) {
         var t = now + i * 0.07;
         [1, 2.01].forEach(function (mult, k) {
           var o = ctx.createOscillator(), g = ctx.createGain();
-          o.type = 'sine';
-          o.frequency.value = f * mult;
-          var peak = k === 0 ? 0.5 : 0.12;
+          o.type = 'sine'; o.frequency.value = f * mult;
           g.gain.setValueAtTime(0.0001, t);
-          g.gain.exponentialRampToValueAtTime(peak, t + 0.012);
+          g.gain.exponentialRampToValueAtTime(k === 0 ? 0.5 : 0.12, t + 0.012);
           g.gain.exponentialRampToValueAtTime(0.0001, t + 1.2);
-          o.connect(g); g.connect(master);
-          o.start(t); o.stop(t + 1.3);
+          o.connect(g); g.connect(master); o.start(t); o.stop(t + 1.3);
         });
       });
     } catch (e) {}
   }
-
   function sparkle(el) {
     if (reduce) return;
     var scene = document.getElementById('scene');
     var r = el.getBoundingClientRect(), s = scene.getBoundingClientRect();
     var cx = r.left + r.width / 2 - s.left, cy = r.top + r.height / 2 - s.top;
     for (var i = 0; i < 16; i++) {
-      var p = document.createElement('span');
-      p.className = 'spark';
+      var p = document.createElement('span'); p.className = 'spark';
       var a = Math.random() * Math.PI * 2, d = 40 + Math.random() * 90;
       p.style.left = cx + 'px'; p.style.top = cy + 'px';
       p.style.setProperty('--dx', Math.cos(a) * d + 'px');
@@ -269,8 +309,7 @@ h1 {
       setTimeout(function (n) { n.remove(); }.bind(null, p), 950);
     }
   }
-
-  document.querySelectorAll('a.step, a.sub, a.m-link').forEach(function (a) {
+  document.querySelectorAll('a.panel, a.pill').forEach(function (a) {
     a.addEventListener('click', function () { chime(); sparkle(a); });
   });
 })();
@@ -285,32 +324,28 @@ h1 {
   var ctx, master, wet, timer = null, playing = false, wanted = true, beat = 0, nextTime = 0, lastDeg = 4;
   try { if (localStorage.getItem('stairsMusic') === 'off') wanted = false; } catch (e) {}
 
-  var BEAT = 0.82;                       /* slow, thoughtful pace */
+  var BEAT = 0.82;
   function hz(m) { return 440 * Math.pow(2, (m - 69) / 12); }
-  /* D major: Dmaj7 → Bm7 → Gmaj7 → Asus4, eight beats each */
   var chords = [
     { root: 50, tones: [62, 66, 69, 73] },
     { root: 47, tones: [62, 66, 69, 71] },
     { root: 43, tones: [62, 67, 71, 66] },
     { root: 45, tones: [62, 64, 69, 71] }
   ];
-  var scale = [74, 76, 78, 81, 83, 86, 88, 90];   /* D pentatonic-ish, music-box register */
+  var scale = [74, 76, 78, 81, 83, 86, 88, 90];
 
   function build() {
     ctx = new AC();
     master = ctx.createGain(); master.gain.value = 0;
     var lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 5200;
     master.connect(lp); lp.connect(ctx.destination);
-    /* airy reverb from a decaying noise impulse */
     var len = ctx.sampleRate * 3.5, imp = ctx.createBuffer(2, len, ctx.sampleRate);
     for (var c = 0; c < 2; c++) { var d = imp.getChannelData(c); for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
     var conv = ctx.createConvolver(); conv.buffer = imp;
     wet = ctx.createGain(); wet.gain.value = 0.55;
     wet.connect(conv); conv.connect(master);
   }
-  function out(node, dry) {
-    var g = ctx.createGain(); g.gain.value = dry; node.connect(g); g.connect(master); node.connect(wet);
-  }
+  function out(node, dry) { var g = ctx.createGain(); g.gain.value = dry; node.connect(g); g.connect(master); node.connect(wet); }
   function bell(t, m, vol) {
     [[1, 1], [2.0, .22], [3.01, .07]].forEach(function (p) {
       var o = ctx.createOscillator(), g = ctx.createGain();
@@ -339,13 +374,12 @@ h1 {
     while (nextTime < ctx.currentTime + 1.2) {
       var bar = Math.floor(beat / 8) % 4, pos = beat % 8, ch = chords[bar];
       if (pos === 0) pad(nextTime, ch);
-      /* sparse melody that wanders by small steps and rests often */
       var play = pos === 0 || pos === 3 || (pos !== 7 && Math.random() < 0.42);
       if (play) {
         var step = [-2, -1, -1, 1, 1, 2, 0][Math.floor(Math.random() * 7)];
         lastDeg = Math.max(0, Math.min(scale.length - 1, lastDeg + step));
         var note = scale[lastDeg];
-        if (pos === 0) { /* land on a chord tone at each new chord */
+        if (pos === 0) {
           var best = ch.tones[0] + 12, bd = 99;
           ch.tones.forEach(function (tn) { [tn + 12, tn + 24].forEach(function (x) { var dd = Math.abs(x - note); if (dd < bd) { bd = dd; best = x; } }); });
           note = best;
@@ -384,31 +418,24 @@ h1 {
     master.gain.linearRampToValueAtTime(0, t + (fast ? 0.6 : 1.5));
     setUI();
   }
-
   btn.addEventListener('click', function (e) {
     e.stopPropagation();
     if (playing) { wanted = false; stop(); } else { wanted = true; start(); }
     try { localStorage.setItem('stairsMusic', wanted ? 'on' : 'off'); } catch (er) {}
   });
-  /* the browser allows sound only after a first touch, so start on the first tap on the page */
   document.addEventListener('pointerdown', function first(e) {
     if (e.target.closest('a, .music')) return;
     document.removeEventListener('pointerdown', first);
     if (wanted && !playing) start();
   });
-  /* leaving for an advent calendar or the periodic table: the melody goes quiet */
   document.querySelectorAll('a[href^="http"]').forEach(function (a) {
     a.addEventListener('click', function () { stop(true); });
   });
-  /* coming back to the stairs: the melody returns if it was on */
-  var stoppedByLeaving = false;
   document.addEventListener('visibilitychange', function () {
-    if (document.hidden) { if (playing) { stoppedByLeaving = true; stop(true); } }
-    else if (wanted && ctx) { stoppedByLeaving = false; start(); }
+    if (document.hidden) { if (playing) stop(true); }
+    else if (wanted && ctx) start();
   });
   window.addEventListener('focus', function () { if (wanted && ctx && !playing && !document.hidden) start(); });
   setUI();
 })();
 </script>
-
-</body></html>
